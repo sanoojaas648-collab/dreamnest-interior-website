@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>“Your Dreams Are Safe In Our Nest” - Dream Nest</title>
+    <meta name="description" content="Transform your space with premium interior design services in Lahore. Expert wallpaper, PVC flooring, wooden flooring, blinds, curtains & more. Get free quote today!">
+    <meta name="keywords" content="interior design Lahore, PVC flooring Lahore, wallpaper installation Bahria Town, wooden flooring Lahore, window blinds Pakistan, curtains Lahore">
+    <script>
+        try {
+            const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+            if (!reduceMotionQuery.matches) {
+                document.documentElement.classList.add('motion-allowed');
+            }
+            if (!reduceMotionQuery.matches && !sessionStorage.getItem('dreamnestIntroSeen')) {
+                document.documentElement.classList.add('intro-pending');
+            }
+        } catch (error) {}
+    </script>
+    <link rel="stylesheet" href="intro.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #121212;
+            --accent: #b13236;
+            --accent-dark: #861d22;
+            --accent-rgb: 177, 50, 54;
+            --gold: #d36a6e;
+            --cream: #f8efef;
+            --light: #fff9f9;
+            --white: #ffffff;
+            --dark: #070707;
+            --gray: #5f5657;
+            --light-gray: #918788;
+            --border: #eadbdd;
+            --shadow: 0 20px 60px rgba(7,7,7,0.08);
+            --shadow-lg: 0 30px 80px rgba(7,7,7,0.14);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: var(--gray);
+            background: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--primary);
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        a { text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        ul { list-style: none; }
+        img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
+        
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.1rem 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: clamp(1rem, 2vw, 2.5rem);
+            transition: all 0.4s ease;
+        }
+        
+        .navbar.scrolled {
+            background: rgba(255, 251, 251, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 30px rgba(7,7,7,0.12);
+            border-bottom: 1px solid rgba(var(--accent-rgb), 0.08);
+            padding: 0.85rem 5%;
+        }
+        
+        .logo {
+            position: relative;
+            z-index: 1001;
+            flex-shrink: 0;
+            width: clamp(175px, 16vw, 240px);
+            line-height: 0;
+        }
+
+        .logo-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .logo-dark { display: none; }
+        .logo-light { filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.24)); }
+        .navbar.scrolled .logo-light { display: none; }
+        .navbar.scrolled .logo-dark { display: block; }
+
+        .nav-links {
+            display: flex;
+            gap: clamp(1.1rem, 1.8vw, 2.2rem);
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .nav-links li { display: flex; align-items: center; }
+
+        .nav-links a {
+            font-weight: 500;
+            color: var(--white);
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        
+        .navbar.scrolled .nav-links a { color: var(--primary); }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+        
+        .nav-btn {
+            background: var(--accent);
+            color: var(--white) !important;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600 !important;
+        }
+        
+        .nav-btn:hover { background: var(--accent-dark); transform: translateY(-2px); }
+        
+        /* Mobile Menu Button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+        
+        .menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: var(--white);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled .menu-toggle span { background: var(--primary); }
+        
+        .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+        
+        /* Mobile Menu Drawer - Premium Design */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 380px;
+            height: 100vh;
+            background: linear-gradient(180deg, #ffffff 0%, var(--cream) 100%);
+            box-shadow: -20px 0 60px rgba(0,0,0,0.15);
+            z-index: 1000;
+            padding: 6rem 2rem 2rem;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .mobile-menu.active { right: 0; }
+        
+        .mobile-menu-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .mobile-menu-header .logo {
+            width: min(220px, 100%);
+        }
+
+        .mobile-menu-header .logo-light {
+            display: none;
+        }
+        
+        .mobile-menu ul { display: flex; flex-direction: column; gap: 0.5rem; }
+        
+        .mobile-menu a {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--primary);
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu a:hover, .mobile-menu a.active {
+            background: var(--cream);
+            color: var(--accent);
+            transform: translateX(8px);
+        }
+        
+        /* Action Buttons */
+        .mobile-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .mobile-action-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-whatsapp {
+            background: #25d366;
+            color: white;
+        }
+        
+        .mobile-whatsapp:hover {
+            background: #1ebe57;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+        }
+        
+        .mobile-call {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .mobile-call:hover {
+            background: #1d1d1d;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(3px);
+        }
+        
+        .mobile-menu-overlay.active { opacity: 1; visibility: visible; }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, rgba(7,7,7,0.84) 0%, rgba(var(--accent-rgb), 0.44) 100%),
+                        url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=80') center/cover no-repeat;
+        }
+        
+        .hero-content { max-width: 800px; color: var(--white); z-index: 1; }
+        
+        .hero-subtitle {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 5rem); color: var(--white); margin-bottom: 1.5rem; line-height: 1.1; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2.5rem; opacity: 0.9; max-width: 550px; }
+        
+        .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+        }
+        
+        .btn-primary { background: var(--accent); color: var(--white); }
+        .btn-primary:hover { background: var(--accent-dark); transform: translateY(-3px); box-shadow: 0 15px 40px rgba(var(--accent-rgb), 0.3); }
+        
+        .btn-outline { background: transparent; color: var(--white); border: 2px solid var(--white); }
+        .btn-outline:hover { background: var(--white); color: var(--primary); }
+        
+        /* Sections */
+        section { padding: 6rem 0; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-subtitle { color: var(--accent); font-weight: 600; letter-spacing: 3px; text-transform: uppercase; font-size: 0.85rem; display: block; margin-bottom: 0.5rem; }
+        .section-title { font-size: clamp(2rem, 4vw, 3rem); color: var(--primary); }
+        
+        /* About Section */
+        .about { background: var(--cream); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+        .about-img { position: relative; }
+        .about-img-main { border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg); }
+        
+        .experience-box {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .experience-box h3 { color: var(--white); font-size: 3rem; line-height: 1; }
+        .experience-box span { font-size: 0.9rem; opacity: 0.9; }
+        .about h2 { margin-bottom: 1.5rem; }
+        .about p { margin-bottom: 1.5rem; font-size: 1.05rem; }
+        
+        .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+        .about-feature { display: flex; align-items: center; gap: 1rem; }
+        .about-feature i { width: 40px; height: 40px; background: rgba(var(--accent-rgb), 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent); }
+        
+        /* Services */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .service-card { background: var(--white); border: 1px solid rgba(var(--accent-rgb), 0.08); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); transition: all 0.4s ease; }
+        .service-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); border-color: rgba(var(--accent-rgb), 0.18); }
+        .service-img { height: 250px; overflow: hidden; position: relative; }
+        .service-img img { transition: transform 0.6s ease; }
+        .service-card:hover .service-img img { transform: scale(1.1); }
+        .service-content { padding: 1.5rem; }
+        .service-content h3 { margin-bottom: 0.8rem; font-size: 1.3rem; }
+        .service-content p { margin-bottom: 1rem; font-size: 0.95rem; }
+        .service-price { font-weight: 700; color: var(--accent); font-size: 1.1rem; display: block; margin-bottom: 1rem; }
+        
+        /* Stats */
+        .stats { background: linear-gradient(135deg, #090909 0%, #231012 52%, var(--accent-dark) 100%); color: var(--white); padding: 5rem 0; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
+        .stat-item h3 { color: var(--accent); font-size: 3rem; margin-bottom: 0.5rem; }
+        .stat-item p { opacity: 0.8; }
+        
+        /* Portfolio */
+        .portfolio { background: var(--light); }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .portfolio-item { position: relative; border-radius: 20px; overflow: hidden; height: 320px; cursor: pointer; }
+        .portfolio-item:first-child { grid-row: span 2; height: 100%; }
+        .portfolio-item img { transition: transform 0.6s ease; }
+        
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .portfolio-item:hover img { transform: scale(1.1); }
+        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+        .portfolio-overlay h3, .portfolio-overlay p { color: var(--white); transform: translateY(20px); transition: transform 0.4s ease; }
+        .portfolio-item:hover .portfolio-overlay h3, .portfolio-item:hover .portfolio-overlay p { transform: translateY(0); }
+        
+        /* Testimonials */
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .testimonial-card { background: linear-gradient(180deg, #ffffff 0%, var(--cream) 100%); border: 1px solid rgba(var(--accent-rgb), 0.08); box-shadow: var(--shadow); padding: 2rem; border-radius: 20px; position: relative; }
+        .quote-icon { font-size: 4rem; color: var(--accent); opacity: 0.15; position: absolute; top: 1rem; right: 1.5rem; font-family: Georgia, serif; }
+        .testimonial-card p { font-size: 1rem; font-style: italic; margin-bottom: 1.5rem; position: relative; z-index: 1; }
+        .client-info { display: flex; align-items: center; gap: 1rem; }
+        .client-info img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); }
+        
+        /* CTA */
+        .cta { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 42%, #121212 100%); color: var(--white); text-align: center; padding: 5rem 0; }
+        .cta h2 { color: var(--white); font-size: 2.5rem; margin-bottom: 1rem; }
+        .cta p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.95; }
+        .cta .btn { background: var(--white); color: var(--accent); }
+        .cta .btn:hover { background: var(--primary); color: var(--white); }
+        
+        /* Footer */
+        footer { background: var(--dark); color: #999; padding: 5rem 0 2rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 4rem; }
+        .footer-logo {
+            width: 110px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 1.25rem;
+            border-radius: 16px;
+            box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+        }
+        .footer-brand h3 { color: var(--white); font-size: 1.8rem; margin-bottom: 1rem; }
+        .footer-brand h3 span { color: var(--accent); }
+        .footer-brand p { font-size: 0.95rem; line-height: 1.8; }
+        .footer-widget h4 { color: var(--white); margin-bottom: 1.5rem; font-size: 1.1rem; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-float:hover { transform: scale(1.1); background: #1ebe57; box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5); }
+
+        :root {
+            --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .motion-reveal {
+            --reveal-distance: 36px;
+            --reveal-scale: 0.985;
+            --motion-y: var(--reveal-distance);
+            --motion-scale: var(--reveal-scale);
+        }
+
+        html.motion-allowed .motion-reveal {
+            opacity: 0;
+            filter: blur(12px);
+            transition:
+                opacity 0.85s var(--ease-out-expo),
+                transform 0.85s var(--ease-out-expo),
+                filter 0.85s var(--ease-out-expo);
+            transition-delay: var(--reveal-delay, 0s);
+            will-change: transform, opacity, filter;
+        }
+
+        html.motion-allowed .motion-reveal:not(.tilt-card) {
+            transform: translate3d(0, var(--motion-y), 0) scale(var(--motion-scale));
+        }
+
+        html.motion-allowed .motion-reveal.is-visible {
+            --motion-y: 0px;
+            --motion-scale: 1;
+            opacity: 1;
+            filter: blur(0);
+        }
+
+        html.motion-allowed .motion-reveal.is-visible:not(.tilt-card) {
+            transform: translate3d(0, 0, 0) scale(1);
+        }
+
+        .magnetic {
+            will-change: transform;
+        }
+
+        .btn,
+        .nav-btn,
+        .mobile-action-btn {
+            transform: translate3d(var(--magnetic-x, 0px), var(--magnetic-y, 0px), 0);
+        }
+
+        .nav-btn:hover,
+        .btn-primary:hover,
+        .btn-outline:hover,
+        .mobile-whatsapp:hover,
+        .mobile-call:hover,
+        .cta .btn:hover {
+            transform: translate3d(var(--magnetic-x, 0px), calc(var(--magnetic-y, 0px) - 3px), 0);
+        }
+
+        .tilt-card {
+            position: relative;
+            transform-style: preserve-3d;
+            transform: perspective(1200px) translate3d(0, calc(var(--card-lift, 0px) + var(--motion-y, 0px)), 0) rotateX(var(--tilt-rotate-x, 0deg)) rotateY(var(--tilt-rotate-y, 0deg)) scale(var(--motion-scale, 1));
+            transition:
+                transform 0.45s var(--ease-out-expo),
+                box-shadow 0.45s ease,
+                border-color 0.35s ease;
+            will-change: transform;
+        }
+
+        .tilt-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(255, 255, 255, 0.22), transparent 44%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .tilt-card:hover::after {
+            opacity: 1;
+        }
+
+        .hero {
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.12) 0%, transparent 32%),
+                linear-gradient(135deg, rgba(7, 7, 7, 0.74) 0%, rgba(var(--accent-rgb), 0.2) 100%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 800px;
+            color: var(--white);
+            z-index: 1;
+        }
+
+        .hero-subtitle {
+            box-shadow: 0 16px 40px rgba(var(--accent-rgb), 0.34);
+        }
+
+        .about-img-main {
+            position: relative;
+        }
+
+        .about-img:hover .about-img-main {
+            --card-lift: -8px;
+        }
+
+        .service-card.tilt-card:hover {
+            --card-lift: -10px;
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(var(--accent-rgb), 0.18);
+        }
+
+        .testimonial-card.tilt-card:hover {
+            --card-lift: -10px;
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(var(--accent-rgb), 0.18);
+        }
+
+        .portfolio-item.tilt-card:hover {
+            --card-lift: -12px;
+        }
+
+        .stat-item {
+            position: relative;
+            padding: 1.2rem 0.75rem;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+
+        .stat-item:hover::before {
+            opacity: 1;
+        }
+
+        .counter {
+            display: inline-block;
+            min-width: 3ch;
+        }
+
+        .cta .container {
+            position: relative;
+        }
+
+        .cta .container::before {
+            content: '';
+            position: absolute;
+            inset: auto 10% -35px 10%;
+            height: 120px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.16), transparent 70%);
+            filter: blur(16px);
+            pointer-events: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .about-img { order: -1; }
+            .experience-box { bottom: -20px; right: -20px; padding: 2rem; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+            .portfolio-item:first-child { grid-row: span 1; height: 320px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar { padding: 1rem 5%; }
+            .logo { width: min(205px, calc(100vw - 7rem)); }
+            .nav-links { display: none; }
+            .menu-toggle { display: flex; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1rem; }
+            .section-header { margin-bottom: 3rem; }
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+            .stat-item h3 { font-size: 2.5rem; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .portfolio-item { height: 280px; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-logo { width: 88px; }
+            .about-features { grid-template-columns: 1fr; }
+            .btn { padding: 0.8rem 1.5rem; font-size: 0.9rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .motion-reveal,
+            .tilt-card,
+            .magnetic {
+                animation: none !important;
+                transition: none !important;
+                transform: none !important;
+                filter: none !important;
+            }
+
+            .motion-reveal {
+                opacity: 1 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="site-intro" id="siteIntro" aria-hidden="true">
+        <div class="site-intro__grid"></div>
+        <div class="site-intro__content">
+            <div class="site-intro__logo-shell">
+                <img src="dreamnest-logo-lockup-dark.png" alt="" class="site-intro__logo">
+            </div>
+            <div class="site-intro__line"></div>
+            <p class="site-intro__caption">Interior Design Studio</p>
+        </div>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="logo" aria-label="Dream Nest Home Interior">
+            <img src="dreamnest-logo-lockup-light.png" alt="" class="logo-image logo-light">
+            <img src="dreamnest-logo-lockup-dark.png" alt="" class="logo-image logo-dark">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="contact.html" class="nav-btn magnetic">Get Quote</a></li>
+        </ul>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Drawer - Premium -->
+    <div class="mobile-menu-overlay" id="mobileOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo" aria-label="Dream Nest Home Interior">
+                <img src="dreamnest-logo-lockup-dark.png" alt="" class="logo-image">
+            </a>
+        </div>
+        <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="mobile-actions">
+            <a href="https://wa.me/923036047227" target="_blank" class="mobile-action-btn mobile-whatsapp magnetic">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <a href="tel:+923036047227" class="mobile-action-btn mobile-call magnetic">
+                <i class="fas fa-phone"></i> Call
+            </a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-subtitle motion-reveal hero-reveal" style="--reveal-delay: 0.08s;">Premium Interior Design</span>
+                <h1 class="motion-reveal hero-reveal" style="--reveal-delay: 0.16s;">Transform Your Space Into a Masterpiece</h1>
+                <p class="motion-reveal hero-reveal" style="--reveal-delay: 0.24s;">Expert interior design solutions in Thrissur. From elegant wallpapers to premium flooring, we create beautiful spaces that inspire.</p>
+                <div class="hero-btns motion-reveal hero-reveal" style="--reveal-delay: 0.32s;">
+                    <a href="contact.html" class="btn btn-primary magnetic" data-magnetic-strength="20">
+                        <i class="fas fa-calendar-check"></i> Get Free Quote
+                    </a>
+                    <a href="portfolio.html" class="btn btn-outline magnetic" data-magnetic-strength="16">
+                        <i class="fas fa-images"></i> View Portfolio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text motion-reveal" style="--reveal-delay: 0.06s;">
+                    <span class="section-subtitle">About DREAM NEST</span>
+                    <h2>Crafting Beautiful Spaces Since 2010</h2>
+                    <p>Welcome to DREAM NEST, your trusted partner for premium interior design services in Thrissur. With over 15 years of experience, we have transformed hundreds of homes and offices across Thrissur and surrounding areas.</p>
+                    <p>Our commitment to quality, attention to detail, and customer satisfaction has made us one of the most recommended interior design companies in the region.</p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Premium Quality</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Expert Team</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>On-Time Delivery</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Best Prices</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-img motion-reveal" style="--reveal-delay: 0.16s;">
+                    <div class="about-img-main tilt-card">
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80" alt="Luxury Interior Design">
+                    </div>
+                    <div class="experience-box">
+                        <h3>15+</h3>
+                        <span>Years<br>Experience</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section>
+        <div class="container">
+            <div class="section-header motion-reveal">
+                <span class="section-subtitle">Our Services</span>
+                <h2 class="section-title">What We Offer</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card tilt-card motion-reveal" style="--reveal-delay: 0.08s;">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&q=80" alt="Wallpaper Installation">
+                    </div>
+                    <div class="service-content">
+                        <h3>InteriorRenovation</h3>
+                        <p>Beautiful wallpaper designs to transform your walls. European & Korean quality.</p>
+                        <!-- <span class="service-price">From Rs. 80/sqft</span> -->
+                        <a href="services.html" class="btn btn-primary magnetic">Learn More</a>
+                    </div>
+                </div>
+                <div class="service-card tilt-card motion-reveal" style="--reveal-delay: 0.16s;">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="PVC Vinyl Flooring">
+                    </div>
+                    <div class="service-content">
+                        <h3>ModularKitchen</h3>
+                        <p>Durable and Stylish Modular Kitchen Setting. Korean & German quality.</p>
+                        <!-- <span class="service-price">From Rs. 250/sqft</span> -->
+                        <a href="services.html" class="btn btn-primary magnetic">Learn More</a>
+                    </div>
+                </div>
+                <div class="service-card tilt-card motion-reveal" style="--reveal-delay: 0.24s;">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" alt="Wooden Flooring">
+                    </div>
+                    <div class="service-content">
+                        <h3>Wardrobes</h3>
+                        <p>Premium wooden flooring for elegant interiors. Import quality laminates.</p>
+                        <!-- <span class="service-price">From Rs. 350/sqft</span> -->
+                        <a href="services.html" class="btn btn-primary magnetic">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item motion-reveal" style="--reveal-delay: 0.04s;">
+                    <h3><span class="counter" data-target="500" data-suffix="+">0</span></h3>
+                    <p>Projects Completed</p>
+                </div>
+                <div class="stat-item motion-reveal" style="--reveal-delay: 0.12s;">
+                    <h3><span class="counter" data-target="400" data-suffix="+">0</span></h3>
+                    <p>Happy Clients</p>
+                </div>
+                <div class="stat-item motion-reveal" style="--reveal-delay: 0.2s;">
+                    <h3><span class="counter" data-target="15" data-suffix="+">0</span></h3>
+                    <p>Years Experience</p>
+                </div>
+                <div class="stat-item motion-reveal" style="--reveal-delay: 0.28s;">
+                    <h3><span class="counter" data-target="100" data-suffix="%">0</span></h3>
+                    <p>Satisfaction Rate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio">
+        <div class="container">
+            <div class="section-header motion-reveal">
+                <span class="section-subtitle">Our Work</span>
+                <h2 class="section-title">Featured Projects</h2>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item tilt-card motion-reveal" style="--reveal-delay: 0.06s;">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80" alt="Luxury Villa">
+                    <div class="portfolio-overlay">
+                        <h3>Luxury Villa - Bahria Town</h3>
+                        <p>Wooden Flooring & Wallpaper</p>
+                    </div>
+                </div>
+                <div class="portfolio-item tilt-card motion-reveal" style="--reveal-delay: 0.14s;">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Modern Living Room">
+                    <div class="portfolio-overlay">
+                        <h3>Modern Living Room - Gulberg</h3>
+                        <p>PVC Flooring & Blinds</p>
+                    </div>
+                </div>
+                <div class="portfolio-item tilt-card motion-reveal" style="--reveal-delay: 0.22s;">
+                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=80" alt="Elegant Bedroom">
+                    <div class="portfolio-overlay">
+                        <h3>Master Bedroom - Model Town</h3>
+                        <p>Wallpaper & Curtains</p>
+                    </div>
+                </div>
+                <div class="portfolio-item tilt-card motion-reveal" style="--reveal-delay: 0.3s;">
+                    <img src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=600&q=80" alt="Office Interior">
+                    <div class="portfolio-overlay">
+                        <h3>Corporate Office - Lahore</h3>
+                        <p>Carpet & Blinds</p>
+                    </div>
+                </div>
+                <div class="portfolio-item tilt-card motion-reveal" style="--reveal-delay: 0.38s;">
+                    <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&q=80" alt="Modern Kitchen">
+                    <div class="portfolio-overlay">
+                        <h3>Modern Kitchen - DHA</h3>
+                        <p>Backsplashes & Flooring</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="portfolio.html" class="btn btn-primary magnetic">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section>
+        <div class="container">
+            <div class="section-header motion-reveal">
+                <span class="section-subtitle">Testimonials</span>
+                <h2 class="section-title">What Clients Say</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card tilt-card motion-reveal" style="--reveal-delay: 0.08s;">
+                    <span class="quote-icon">"</span>
+                    <p>"Excellent work on my villa in Bahria Town. The wallpaper and flooring are top quality. Highly recommended!"</p>
+                    <div class="client-info">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Ahmed Khan">
+                        <div>
+                            <h4>Ahmed Khan</h4>
+                            <span>Bahria Town, Lahore</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card tilt-card motion-reveal" style="--reveal-delay: 0.16s;">
+                    <span class="quote-icon">"</span>
+                    <p>"Very professional team. They completed my office interior in just 10 days. Great quality and service."</p>
+                    <div class="client-info">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt="Sarah Ahmed">
+                        <div>
+                            <h4>Sarah Ahmed</h4>
+                            <span>Gulberg, Lahore</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card tilt-card motion-reveal" style="--reveal-delay: 0.24s;">
+                    <span class="quote-icon">"</span>
+                    <p>"Best interior design service in Lahore. Fair prices and excellent finish. Will definitely hire again!"</p>
+                    <div class="client-info">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="Usman Ali">
+                        <div>
+                            <h4>Usman Ali</h4>
+                            <span>Model Town, Lahore</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container motion-reveal">
+            <h2>Ready to Transform Your Space?</h2>
+            <p>Get a free quote today! Our team will contact you within 24 hours.</p>
+            <a href="contact.html" class="btn magnetic">
+                <i class="fas fa-phone"></i> Contact Us Now
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="dreamnestlogo.PNG" alt="Dream Nest logo" class="footer-logo">
+                    <h3>DREAM<span>NEST</span></h3>
+                    <p>Premium interior design services in Thrissur. Transforming spaces since 2010 with quality craftsmanship.</p>
+                </div>
+                <div class="footer-widget">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-widget">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Wallpaper</a></li>
+                        <li><a href="services.html">PVC Vinyl Floor</a></li>
+                        <li><a href="services.html">Wooden Floor</a></li>
+                        <li><a href="services.html">Window Blinds</a></li>
+                        <li><a href="services.html">Curtains</a></li>
+                    </ul>
+                </div>
+                <div class="footer-widget">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone"></i> +91 8877225537</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Office Thrissur</li>
+                        <li style="padding-left: 20px;">Thrissur,</li>
+                        <li style="padding-left: 20px;">Kerala, India</li>
+                        <li><i class="fas fa-envelope"></i> Info@dreamnestinterior.co.in</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> DREAMNEST. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/918877225537" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="script.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        mobileOverlay.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+</body>
+</html>
