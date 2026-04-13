@@ -399,12 +399,128 @@
         .portfolio-item:hover .portfolio-overlay h3, .portfolio-item:hover .portfolio-overlay p { transform: translateY(0); }
         
         /* Testimonials */
-        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .testimonial-card { background: linear-gradient(180deg, #ffffff 0%, var(--cream) 100%); border: 1px solid rgba(var(--accent-rgb), 0.08); box-shadow: var(--shadow); padding: 2rem; border-radius: 20px; position: relative; }
-        .quote-icon { font-size: 4rem; color: var(--accent); opacity: 0.15; position: absolute; top: 1rem; right: 1.5rem; font-family: Georgia, serif; }
-        .testimonial-card p { font-size: 1rem; font-style: italic; margin-bottom: 1.5rem; position: relative; z-index: 1; }
-        .client-info { display: flex; align-items: center; gap: 1rem; }
-        .client-info img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); }
+        
+        .testimonials-shell {
+            position: relative;
+        }
+
+        .testimonials-shell:focus-visible {
+            outline: 2px solid rgba(var(--accent-rgb), 0.25);
+            outline-offset: 8px;
+        }
+
+        .testimonials-carousel {
+            overflow: hidden;
+        }
+
+        .testimonials-track {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonials-shell[data-carousel-ready="true"] .testimonials-track {
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform;
+        }
+
+        .testimonials-shell[data-carousel-ready="true"] .testimonial-slide {
+            flex: 0 0 calc((100% - 4rem) / 3);
+            min-width: calc((100% - 4rem) / 3);
+        }
+
+        .testimonial-card {
+            position: relative;
+            height: 100%;
+            background: linear-gradient(180deg, #ffffff 0%, var(--cream) 100%);
+            border: 1px solid rgba(var(--accent-rgb), 0.08);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            border-radius: 20px;
+        }
+
+        .quote-icon {
+            font-size: 4rem;
+            color: var(--accent);
+            opacity: 0.15;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-card p {
+            font-size: 1rem;
+            font-style: italic;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .client-info img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            flex-shrink: 0;
+        }
+
+        .client-info h4 {
+            margin-bottom: 0.15rem;
+            color: var(--primary);
+        }
+
+        .client-info span {
+            display: block;
+            color: var(--gray);
+            font-size: 0.92rem;
+        }
+
+        .testimonials-dots {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            margin-top: 1.75rem;
+        }
+
+        .testimonials-shell[data-carousel-ready="true"] .testimonials-dots {
+            display: flex;
+        }
+
+        .testimonials-dot {
+            width: 10px;
+            height: 10px;
+            padding: 0;
+            border: none;
+            border-radius: 999px;
+            background: rgba(var(--accent-rgb), 0.18);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonials-dot:hover,
+        .testimonials-dot:focus-visible {
+            background: rgba(var(--accent-rgb), 0.45);
+            outline: none;
+        }
+
+        .testimonials-dot.is-active {
+            width: 30px;
+            background: var(--accent);
+        }
         
         /* CTA */
         .cta { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 42%, #121212 100%); color: var(--white); text-align: center; padding: 5rem 0; }
@@ -632,6 +748,10 @@
             .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
             .portfolio-item:first-child { grid-row: span 1; height: 320px; }
             .footer-grid { grid-template-columns: 1fr 1fr; }
+            .testimonials-shell[data-carousel-ready="true"] .testimonial-slide {
+                flex-basis: calc((100% - 2rem) / 2);
+                min-width: calc((100% - 2rem) / 2);
+            }
         }
         
         @media (max-width: 768px) {
@@ -650,6 +770,11 @@
             .footer-logo { width: 88px; }
             .about-features { grid-template-columns: 1fr; }
             .btn { padding: 0.8rem 1.5rem; font-size: 0.9rem; }
+            .testimonials-track { grid-template-columns: 1fr; }
+            .testimonials-shell[data-carousel-ready="true"] .testimonial-slide {
+                flex-basis: 100%;
+                min-width: 100%;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -669,6 +794,11 @@
             .motion-reveal {
                 opacity: 1 !important;
             }
+
+            .testimonials-track,
+            .testimonials-dot {
+                transition: none !important;
+            }
         }
     </style>
 </head>
@@ -679,7 +809,7 @@
             <div class="site-intro__logo-shell">
                 <img src="dreamnest-logo-lockup-dark.png" alt="" class="site-intro__logo">
             </div>
-            <div class="site-intro__line"></div>
+            <div class="site-intro__line"></div> 
             <p class="site-intro__caption">Interior Design Studio</p>
         </div>
     </div>
@@ -915,41 +1045,232 @@
                 <span class="section-subtitle">Testimonials</span>
                 <h2 class="section-title">What Clients Say</h2>
             </div>
-            <div class="testimonials-grid">
+            <div class="testimonials-shell motion-reveal" style="--reveal-delay: 0.08s;" data-testimonials-carousel tabindex="0" aria-label="Client testimonials carousel">
+                <div class="testimonials-carousel">
+                    <div class="testimonials-track">
+                        <article class="testimonial-card testimonial-slide tilt-card">
+                            <span class="quote-icon">"</span>
+                            <p>"Kitchen Renovation: Clean work, modern finish. Exactly what we wanted."</p>
+                            <div class="client-info">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Client portrait of Nikhil" loading="lazy">
+                                <div>
+                                    <h4>Nikhil</h4>
+                                    <span>Varma Homes 1A, Nadathara</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="testimonial-card testimonial-slide tilt-card">
+                            <span class="quote-icon">"</span>
+                            <p>"Full Interior: Elegant spaces with great attention to detail."</p>
+                            <div class="client-info">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt="Client portrait of Ashik" loading="lazy">
+                                <div>
+                                    <h4>Ashik</h4>
+                                    <span>Sowparnika 3F, Amala Nagar</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="testimonial-card testimonial-slide tilt-card">
+                            <span class="quote-icon">"</span>
+                            <p>"Kitchen & Work Area Renovation: Smart layout with a perfect finish."</p>
+                            <div class="client-info">
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="Client portrait of Josaph" loading="lazy">
+                                <div>
+                                    <h4>Josaph</h4>
+                                    <span>Arattupuzha</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="testimonial-card testimonial-slide tilt-card">
+                            <span class="quote-icon">"</span>
+                            <p>"Full Interior: Perfect blend of style and functionality."</p>
+                            <div class="client-info">
+                                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&q=80" alt="Client portrait of Rahul Ashirvad" loading="lazy">
+                                <div>
+                                    <h4>Rahul Ashirvad</h4>
+                                    <span>Puthoor, Thrissur</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="testimonial-card testimonial-slide tilt-card">
+                            <span class="quote-icon">"</span>
+                            <p>"Full Interior: Clean work, modern finish. Exactly what we wanted."</p>
+                            <div class="client-info">
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="Client portrait of Ashik" loading="lazy">
+                                <div>
+                                    <h4>Ashik</h4>
+                                    <span>Sowparnika, Amala Nagar</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="testimonials-dots" data-testimonial-dots aria-label="Carousel pagination"></div>
+            </div>
+            <div class="testimonials-shell motion-reveal" style="--reveal-delay: 0.08s;" hidden aria-hidden="true">
+                <div class="testimonials-carousel">
+                    <div class="testimonials-track">
+                        <article class="testimonial-card testimonial-slide tilt-card">
+                            <div class="testimonial-visual">
+                                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&q=80" alt="Modern modular kitchen interior" loading="lazy">
+                                <span class="testimonial-tag">Kitchen Renovation</span>
+                            </div>
+                            <div class="testimonial-content">
+                                <span class="testimonial-label">Client Story 01</span>
+                                <span class="quote-icon">"</span>
+                                <p>"Clean work, modern finish. Exactly what we wanted."</p>
+                                <div class="client-info">
+                                    <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=240&q=80" alt="Finished interior detail for Nikhil's project" loading="lazy">
+                                    <div>
+                                        <h4>Nikhil</h4>
+                                        <span>Varma Homes 1A, Nadathara</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="testimonial-card testimonial-slide tilt-card">
+                            <div class="testimonial-visual">
+                                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80" alt="Premium living room interior" loading="lazy">
+                                <span class="testimonial-tag">Full Interior</span>
+                            </div>
+                            <div class="testimonial-content">
+                                <span class="testimonial-label">Client Story 02</span>
+                                <span class="quote-icon">"</span>
+                                <p>"Elegant spaces with great attention to detail."</p>
+                                <div class="client-info">
+                                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=240&q=80" alt="Bedroom styling detail for Ashik's project" loading="lazy">
+                                    <div>
+                                        <h4>Ashik</h4>
+                                        <span>Sowparnika 3F, Amala Nagar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="testimonial-card testimonial-slide tilt-card">
+                            <div class="testimonial-visual">
+                                <img src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=1200&q=80" alt="Refined workspace interior" loading="lazy">
+                                <span class="testimonial-tag">Kitchen + Work Area</span>
+                            </div>
+                            <div class="testimonial-content">
+                                <span class="testimonial-label">Client Story 03</span>
+                                <span class="quote-icon">"</span>
+                                <p>"Smart layout with a perfect finish."</p>
+                                <div class="client-info">
+                                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=240&q=80" alt="Warm home finish detail for Josaph's project" loading="lazy">
+                                    <div>
+                                        <h4>Josaph</h4>
+                                        <span>Arattupuzha</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="testimonial-card testimonial-slide tilt-card">
+                            <div class="testimonial-visual">
+                                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80" alt="Luxury villa interior styling" loading="lazy">
+                                <span class="testimonial-tag">Full Interior</span>
+                            </div>
+                            <div class="testimonial-content">
+                                <span class="testimonial-label">Client Story 04</span>
+                                <span class="quote-icon">"</span>
+                                <p>"Perfect blend of style and functionality."</p>
+                                <div class="client-info">
+                                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=240&q=80" alt="Living room detail for Rahul Ashirvad's project" loading="lazy">
+                                    <div>
+                                        <h4>Rahul Ashirvad</h4>
+                                        <span>Puthoor, Thrissur</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="testimonial-card testimonial-slide tilt-card">
+                            <div class="testimonial-visual">
+                                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80" alt="Elegant bedroom interior" loading="lazy">
+                                <span class="testimonial-tag">Full Interior</span>
+                            </div>
+                            <div class="testimonial-content">
+                                <span class="testimonial-label">Client Story 05</span>
+                                <span class="quote-icon">"</span>
+                                <p>"Clean work, modern finish. Exactly what we wanted."</p>
+                                <div class="client-info">
+                                    <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=240&q=80" alt="Kitchen detail for Ashik's apartment" loading="lazy">
+                                    <div>
+                                        <h4>Ashik</h4>
+                                        <span>Sowparnika, Amala Nagar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="testimonials-controls" aria-label="Carousel controls">
+                    <div class="testimonials-dots" data-testimonial-dots></div>
+                    <div class="testimonials-buttons">
+                        <button type="button" class="testimonials-btn" data-testimonial-prev aria-label="Show previous testimonial">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button type="button" class="testimonials-btn" data-testimonial-next aria-label="Show next testimonial">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <template><div class="testimonials-grid">
                 <div class="testimonial-card tilt-card motion-reveal" style="--reveal-delay: 0.08s;">
                     <span class="quote-icon">"</span>
-                    <p>"Excellent work on my villa in Bahria Town. The wallpaper and flooring are top quality. Highly recommended!"</p>
+                    <p>“Kitchen Renovation  :Clean work, modern finish. Exactly what we wanted.”</p>
                     <div class="client-info">
                         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Ahmed Khan">
                         <div>
-                            <h4>Ahmed Khan</h4>
-                            <span>Bahria Town, Lahore</span>
+                            <h4>Nikhil</h4>
+                            <span>Varma Homes 1A , Nadathara</span>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card tilt-card motion-reveal" style="--reveal-delay: 0.16s;">
                     <span class="quote-icon">"</span>
-                    <p>"Very professional team. They completed my office interior in just 10 days. Great quality and service."</p>
+                    <p>“Full Interior: Elegant spaces with great attention to detail.”</p>
                     <div class="client-info">
                         <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt="Sarah Ahmed">
                         <div>
-                            <h4>Sarah Ahmed</h4>
-                            <span>Gulberg, Lahore</span>
+                            <h4>Ashik</h4>
+                            <span>Sowparnika 3F , Amala nagar</span>
+                        </div>
+                    </div>
+                </div>
+                 <div class="testimonial-card tilt-card motion-reveal" style="--reveal-delay: 0.16s;">
+                    <span class="quote-icon">"</span>
+                    <p>“Kitchen & Work Area Renovation: Smart layout with a perfect finish.”</p>
+                    <div class="client-info">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt="Sarah Ahmed">
+                        <div>
+                            <h4>Josaph</h4>
+                            <span>Arattupuzha</span>
+                        </div>
+                    </div>
+                </div>
+                 <div class="testimonial-card tilt-card motion-reveal" style="--reveal-delay: 0.16s;">
+                    <span class="quote-icon">"</span>
+                    <p>“Full Interior: Perfect blend of style and functionality.”</p>
+                    <div class="client-info">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt="Sarah Ahmed">
+                        <div>
+                            <h4>Rahul Ashirvad</h4>
+                            <span>Puthoor , Thrissur</span>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card tilt-card motion-reveal" style="--reveal-delay: 0.24s;">
                     <span class="quote-icon">"</span>
-                    <p>"Best interior design service in Lahore. Fair prices and excellent finish. Will definitely hire again!"</p>
+                    <p>“Full Interior: Clean work, modern finish. Exactly what we wanted.”</p>
                     <div class="client-info">
                         <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="Usman Ali">
                         <div>
-                            <h4>Usman Ali</h4>
-                            <span>Model Town, Lahore</span>
+                            <h4>Ashik</h4>
+                            <span>Sowparnika , Amala nagar</span>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div></template>
         </div>
     </section>
 
