@@ -5,7 +5,32 @@ document.addEventListener('DOMContentLoaded', () => {
   applyServiceFromUrl();
   setupCounters();
   setupHomepageMotion();
+  setupServicesDropdown();
+  setupMobileMenuLinkCloseFallback();
 });
+
+const SERVICE_MENU_ITEMS = [
+  { label: 'Interior Renovation', slug: 'interior-renovation' },
+  { label: 'Modular Kitchen', slug: 'modular-kitchen' },
+  { label: 'Wardrobes', slug: 'wardrobes' },
+  { label: 'Prayer Area', slug: 'prayer-area' },
+  { label: 'Bed Cots', slug: 'bed-cots' },
+  { label: 'Partitions', slug: 'partitions' },
+  { label: 'TV Units', slug: 'tv-units' },
+  { label: 'Crockery Shelf', slug: 'crockery-shelf' },
+  { label: 'Wall Paneling', slug: 'wall-paneling' },
+  { label: 'False Ceiling Works', slug: 'false-ceiling-works' },
+  { label: 'Handrails', slug: 'handrails' },
+  { label: 'Putty / Painting', slug: 'putty-painting' },
+  { label: 'Wallpaper / Texture', slug: 'wallpaper-texture' },
+  { label: 'Curtains', slug: 'curtains' },
+  { label: 'Electrical / Plumping', slug: 'electrical-plumping' },
+  { label: 'Tiling', slug: 'tiling' },
+  { label: 'Bathroom Doors', slug: 'bathroom-doors' },
+  { label: 'Space Planning', slug: 'space-planning' },
+  { label: '3D Visualization', slug: 'visualization-3d' },
+  { label: 'Estimations', slug: 'estimations' }
+];
 
 function markIntroComplete(root = document.documentElement) {
   if (root.dataset.introComplete === 'true') {
@@ -179,7 +204,26 @@ function applyServiceFromUrl() {
     blinds: 'Window Blinds',
     curtains: 'Curtains',
     carpet: 'Carpet',
-    'astro-turf': 'Astro Turf'
+    'astro-turf': 'Astro Turf',
+    'interior-renovation': 'Interior Renovation',
+    'modular-kitchen': 'Modular Kitchen',
+    wardrobes: 'Wardrobes',
+    'prayer-area': 'Prayer Area',
+    'bed-cots': 'Bed Cots',
+    partitions: 'Partitions',
+    'tv-units': 'TV Units',
+    'crockery-shelf': 'Crockery Shelf',
+    'wall-paneling': 'Wall Paneling',
+    'false-ceiling-works': 'False Ceiling Works',
+    handrails: 'Handrails',
+    'putty-painting': 'Putty / Painting',
+    'wallpaper-texture': 'Wallpaper / Texture',
+    'electrical-plumping': 'Electrical / Plumping',
+    tiling: 'Tiling',
+    'bathroom-doors': 'Bathroom Doors',
+    'space-planning': 'Space Planning',
+    'visualization-3d': '3D Visualization',
+    estimations: 'Estimations'
   };
 
   const mappedService = serviceMap[serviceParam.toLowerCase()] || serviceParam;
@@ -422,5 +466,340 @@ function setupTiltCards() {
 
     card.addEventListener('pointerleave', resetTilt);
     card.addEventListener('pointercancel', resetTilt);
+  });
+}
+
+function setupServicesDropdown() {
+  const desktopServicesLink = document.querySelector('.nav-links > li > a[href="services.html"]');
+  const mobileServicesLink = document.querySelector('.mobile-menu ul > li > a[href="services.html"]');
+
+  if (!desktopServicesLink && !mobileServicesLink) {
+    return;
+  }
+
+  injectServicesDropdownStyles();
+
+  if (desktopServicesLink) {
+    buildDesktopServicesDropdown(desktopServicesLink);
+  }
+
+  if (mobileServicesLink) {
+    buildMobileServicesDropdown(mobileServicesLink);
+  }
+
+  setupDesktopDropdownInteractions();
+}
+
+function injectServicesDropdownStyles() {
+  if (document.getElementById('servicesDropdownStyles')) {
+    return;
+  }
+
+  const style = document.createElement('style');
+  style.id = 'servicesDropdownStyles';
+  style.textContent = `
+    .services-dropdown {
+      position: relative;
+    }
+
+    .services-dropdown__toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: none;
+      border: none;
+      padding: 0;
+      font: inherit;
+      font-weight: 500;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      color: inherit;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .services-dropdown__toggle:hover,
+    .services-dropdown__toggle:focus-visible,
+    .services-dropdown.is-open .services-dropdown__toggle,
+    .services-dropdown__toggle.active {
+      color: var(--accent);
+      outline: none;
+    }
+
+    .services-dropdown__toggle i {
+      font-size: 0.72rem;
+      transition: transform 0.3s ease;
+    }
+
+    .services-dropdown.is-open .services-dropdown__toggle i {
+      transform: rotate(180deg);
+    }
+
+    .services-dropdown__menu {
+      position: absolute;
+      top: calc(100% + 1rem);
+      left: 50%;
+      width: min(320px, 82vw);
+      padding: 0.8rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid rgba(var(--accent-rgb), 0.14);
+      box-shadow: 0 24px 60px rgba(7, 7, 7, 0.16);
+      transform: translate(-50%, 12px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.24s ease, transform 0.24s ease, visibility 0.24s ease;
+      backdrop-filter: blur(16px);
+      z-index: 1200;
+    }
+
+    .services-dropdown.is-open .services-dropdown__menu {
+      transform: translate(-50%, 0);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .services-dropdown__item,
+    .services-dropdown__more {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border-radius: 14px;
+      color: var(--primary) !important;
+      font-size: 0.96rem !important;
+      font-weight: 500;
+      letter-spacing: 0 !important;
+      text-transform: none !important;
+      background: transparent;
+      transition: background 0.24s ease, color 0.24s ease, transform 0.24s ease;
+    }
+
+    .services-dropdown__item:hover,
+    .services-dropdown__more:hover {
+      background: var(--cream);
+      color: var(--accent) !important;
+      transform: translateX(4px);
+    }
+
+    .services-dropdown__more {
+      margin-top: 0.35rem;
+      border-top: 1px solid rgba(var(--accent-rgb), 0.08);
+      border-radius: 0 0 14px 14px;
+      padding-top: 1rem;
+      font-weight: 600;
+    }
+
+    .mobile-services-dropdown {
+      display: block !important;
+    }
+
+    .mobile-services-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      background: transparent;
+      border: none;
+      color: var(--primary);
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      font: inherit;
+      font-size: 1.1rem;
+      font-weight: 500;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-services-toggle:hover,
+    .mobile-services-toggle:focus-visible,
+    .mobile-services-toggle.active {
+      background: var(--cream);
+      color: var(--accent);
+      outline: none;
+    }
+
+    .mobile-services-toggle i {
+      font-size: 0.82rem;
+      transition: transform 0.3s ease;
+    }
+
+    .mobile-services-dropdown.is-open .mobile-services-toggle i {
+      transform: rotate(180deg);
+    }
+
+    .mobile-services-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+      padding-left: 0.85rem;
+    }
+
+    .mobile-services-dropdown.is-open .mobile-services-menu {
+      max-height: 640px;
+    }
+
+    .mobile-services-item,
+    .mobile-services-more {
+      display: block;
+      padding: 0.85rem 1rem;
+      margin-top: 0.45rem;
+      border-radius: 12px;
+      background: rgba(var(--accent-rgb), 0.05);
+      color: var(--primary) !important;
+      font-size: 0.96rem !important;
+      font-weight: 500;
+      letter-spacing: 0 !important;
+      text-transform: none !important;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-services-item:hover,
+    .mobile-services-more:hover {
+      background: var(--cream);
+      color: var(--accent) !important;
+      transform: translateX(8px);
+    }
+
+    .mobile-services-more {
+      margin-top: 0.65rem;
+      font-weight: 600;
+    }
+  `;
+
+  document.head.appendChild(style);
+}
+
+function buildDesktopServicesDropdown(link) {
+  const parentItem = link.parentElement;
+
+  if (!parentItem || parentItem.classList.contains('services-dropdown')) {
+    return;
+  }
+
+  const isActive = link.classList.contains('active');
+  const featuredServices = SERVICE_MENU_ITEMS.slice(0, 6);
+  const menuMarkup = featuredServices.map((service) => `
+    <a href="services.html#${service.slug}" class="services-dropdown__item" role="menuitem">
+      <span>${service.label}</span>
+      <i class="fas fa-arrow-right"></i>
+    </a>
+  `).join('');
+
+  parentItem.classList.add('services-dropdown');
+  parentItem.innerHTML = `
+    <button type="button" class="services-dropdown__toggle${isActive ? ' active' : ''}" aria-expanded="false" aria-haspopup="true">
+      <span>Services</span>
+      <i class="fas fa-chevron-down" aria-hidden="true"></i>
+    </button>
+    <div class="services-dropdown__menu" role="menu">
+      ${menuMarkup}
+      <a href="services.html#all-services" class="services-dropdown__more" role="menuitem">See More Services</a>
+    </div>
+  `;
+}
+
+function buildMobileServicesDropdown(link) {
+  const parentItem = link.parentElement;
+
+  if (!parentItem || parentItem.classList.contains('mobile-services-dropdown')) {
+    return;
+  }
+
+  const isActive = link.classList.contains('active');
+  const featuredServices = SERVICE_MENU_ITEMS.slice(0, 6);
+  const submenuMarkup = featuredServices.map((service) => `
+    <a href="services.html#${service.slug}" class="mobile-services-item">${service.label}</a>
+  `).join('');
+
+  parentItem.classList.add('mobile-services-dropdown');
+  if (isActive) {
+    parentItem.classList.add('is-open');
+  }
+
+  parentItem.innerHTML = `
+    <button type="button" class="mobile-services-toggle${isActive ? ' active' : ''}" aria-expanded="${isActive ? 'true' : 'false'}">
+      <span>Services</span>
+      <i class="fas fa-chevron-down" aria-hidden="true"></i>
+    </button>
+    <div class="mobile-services-menu">
+      ${submenuMarkup}
+      <a href="services.html#all-services" class="mobile-services-more">See More Services</a>
+    </div>
+  `;
+
+  const toggle = parentItem.querySelector('.mobile-services-toggle');
+
+  if (!toggle) {
+    return;
+  }
+
+  toggle.addEventListener('click', () => {
+    const isOpen = parentItem.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+}
+
+function setupDesktopDropdownInteractions() {
+  const desktopDropdown = document.querySelector('.services-dropdown');
+  const toggle = desktopDropdown?.querySelector('.services-dropdown__toggle');
+
+  if (!desktopDropdown || !toggle) {
+    return;
+  }
+
+  const closeDropdown = () => {
+    desktopDropdown.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+
+  toggle.addEventListener('click', (event) => {
+    event.preventDefault();
+    const isOpen = desktopDropdown.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  document.addEventListener('click', (event) => {
+    if (desktopDropdown.contains(event.target)) {
+      return;
+    }
+
+    closeDropdown();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeDropdown();
+    }
+  });
+}
+
+function setupMobileMenuLinkCloseFallback() {
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileOverlay = document.getElementById('mobileOverlay');
+
+  if (!mobileMenu || !menuToggle || !mobileOverlay) {
+    return;
+  }
+
+  mobileMenu.addEventListener('click', (event) => {
+    const link = event.target.closest('a');
+
+    if (!link) {
+      return;
+    }
+
+    menuToggle.classList.remove('active');
+    mobileMenu.classList.remove('active');
+    mobileOverlay.classList.remove('active');
+    document.body.style.overflow = '';
   });
 }
