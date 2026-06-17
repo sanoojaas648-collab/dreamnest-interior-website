@@ -7,6 +7,13 @@ Static multi-page marketing website for Dream Nest interior design services.
 This project is a plain HTML, CSS, and JavaScript site with no build step or package manager.  
 Each main page includes its own page-specific markup and inline styles, while shared behavior is handled through a common script and intro stylesheet.
 
+<img width="926" height="394" alt="Screenshot 2026-06-17 164129" src="https://github.com/user-attachments/assets/b3560071-85e9-47a4-b853-a50c96c8d691" />
+<img width="915" height="377" alt="Screenshot 2026-06-17 164148" src="https://github.com/user-attachments/assets/df8d5095-0713-4005-8705-165882e44f53" />
+<img width="928" height="371" alt="image" src="https://github.com/user-attachments/assets/c33787ce-cfea-4791-8a2c-ed98e7b42816" />
+
+
+
+
 ## Current Pages
 
 - `index.html` - homepage with hero, services, stats, featured work, testimonials, and CTA
